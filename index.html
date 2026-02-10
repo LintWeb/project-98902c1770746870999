@@ -387,6 +387,18 @@
             section { padding: 4rem 5%; }
             .hero h1 { font-size: 2.5rem; }
         }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -404,7 +416,7 @@
     </nav>
 
     <header class="hero" id="home">
-        <div class="hero-container">
+        <div class="hero-container reveal">
             <div class="hero-text">
                 <span class="hero-label">Chittagong's Premier Salon</span>
                 <h1>Elegance Defined, <br><span style="color: var(--primary-gold);">Style Reimagined.</span></h1>
@@ -421,10 +433,10 @@
     </header>
 
     <section id="about">
-        <div class="section-title">
+        <div class="section-title reveal">
             <h2>Our Story</h2>
         </div>
-        <div class="about-grid">
+        <div class="about-grid reveal">
             <div class="about-image">
                 <img src="images/uploaded-1.jpg" alt="Re Style Salon Interior" style="width: 100%; border-radius: 12px; box-shadow: 20px 20px 0px var(--primary-gold);">
             </div>
@@ -442,19 +454,19 @@
     </section>
 
     <section id="services" style="background-color: #fff;">
-        <div class="section-title">
+        <div class="section-title reveal">
             <h2>Our Services</h2>
         </div>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card reveal">
                 <h3>Hair Styling</h3>
                 <p>Precision cuts, modern styling, and hair treatments tailored to your look.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card reveal" style="transition-delay: 0.2s;">
                 <h3>Beauty Salon</h3>
                 <p>Facials, skin care, and bridal makeup services by professionals.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card reveal" style="transition-delay: 0.4s;">
                 <h3>Grooming</h3>
                 <p>Specialized beard trimming and grooming for the modern gentleman.</p>
             </div>
@@ -462,10 +474,10 @@
     </section>
 
     <section id="contact">
-        <div class="section-title">
+        <div class="section-title reveal">
             <h2>Visit Us</h2>
         </div>
-        <div class="contact-container">
+        <div class="contact-container reveal">
             <div class="contact-info">
                 <h3>Get in Touch</h3>
                 <div class="info-item">
@@ -503,6 +515,22 @@
 
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
