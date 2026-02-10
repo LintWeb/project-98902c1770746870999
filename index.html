@@ -80,48 +80,136 @@
             color: var(--primary-gold);
         }
 
-        /* Hero Section */
+        /* Hero Section - Updated UI */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/uploaded-1.jpg');
-            background-size: cover;
-            background-position: center;
+            min-height: 100vh;
+            padding: 120px 10% 60px;
+            background: radial-gradient(circle at 70% 30%, #2a2a2a 0%, var(--dark-bg) 70%);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
             color: var(--text-light);
-            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 40%;
+            height: 60%;
+            background: var(--primary-gold);
+            filter: blur(150px);
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: var(--primary-gold);
+            margin-right: 15px;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            max-width: 550px;
+            color: #ccc;
+            font-weight: 300;
         }
 
-        .cta-button {
-            padding: 1rem 2.5rem;
-            background-color: var(--primary-gold);
-            color: var(--dark-bg);
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .cta-secondary {
+            color: var(--text-light);
             text-decoration: none;
             font-weight: 600;
             text-transform: uppercase;
-            border-radius: 4px;
-            transition: var(--transition);
-            border: 2px solid var(--primary-gold);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
         }
 
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--primary-gold);
+        .cta-secondary::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .cta-secondary:hover::after {
+            width: 100%;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.02);
+            border-color: var(--primary-gold);
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            border-top: 2px solid var(--primary-gold);
+            border-right: 2px solid var(--primary-gold);
+            border-radius: 0 20px 0 0;
         }
 
         /* Sections */
@@ -296,9 +384,20 @@
     </nav>
 
     <header class="hero" id="home">
-        <h1>RE STYLE</h1>
-        <p>BE FRESH LOOK SMART</p>
-        <a href="#contact" class="cta-button">Book Appointment</a>
+        <div class="hero-container">
+            <div class="hero-text">
+                <span class="hero-label">Chittagong's Premier Salon</span>
+                <h1>Elegance Defined, <br><span style="color: var(--primary-gold);">Style Reimagined.</span></h1>
+                <p>Welcome to Re Style, where professional expertise meets luxury grooming. Step in to transform your look with our master stylists.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="cta-button">Book Appointment</a>
+                    <a href="#services" class="cta-secondary">Explore Services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/uploaded-1.jpg" alt="Re Style Premium Salon Showcase">
+            </div>
+        </div>
     </header>
 
     <section id="about">
